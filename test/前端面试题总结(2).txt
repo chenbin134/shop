@@ -1,0 +1,207 @@
+面试题整理
+Day1
+1.CSS选择符有哪些？哪些属性可以继承？
+     id选择器（ # myid）.类选择器（.myclassname）标签选择器（div, h1, p）相邻选择器（h1 + p）子选择器（ul > li）后代选择器（li a）通配符选择器（ * ）属性选择器（a[rel = "external"]）
+     伪类选择器（a:hover, li:nth-child）
+     可继承的样式： font-size font-family color, UL LI DL DD DT;
+     不可继承的样式：border padding margin width height ;
+
+2.CSS优先级算法如何计算？
+     优先级就近原则，同权重情况下样式定义最近者为准;
+     载入样式以最后载入的定位为准;
+优先级为:
+    同权重: 内联样式表（标签内部）> 嵌入样式表（当前文件中）> 外部样式表（外部文件中）。
+    !important >  id > class > tag
+    important 比 内联优先级高
+3.行内元素有哪些？块级元素有哪些？空（void）元素有哪些？css的盒子模型？
+     行内元素：a、b、span、img、input、strong、select、label、em、button、textarea
+     块级元素：div、ul、li、dl、dt、dd、p、h1-h6 、blockquote
+     空元素：br、hr、img、input、link、meta
+     盒子模型：在网页中，一个元素占有空间的大小由几个部分构成，其中包括元素的内容（content），元素的内边距（padding），元素的边框（border），
+            元素的外边距（margin）四个部分。这四个部分占有的空间中，有的部分可以显示相应的内容，而有的部分只用来分隔相邻的区域或区域。4个部分
+            一起构成了css中元素的盒模型。
+4.CSS新增的特性有哪些？
+ 新增各种CSS选择器 （: not(.input)：所有 class 不是“input”的节点）
+  圆角             （border-radius:8px）
+  多列布局         （multi-column layout）
+  阴影和反射       （Shadow\Reflect）
+  文字特效         （text-shadow、）
+  文字渲染         （Text-decoration）
+  线性渐变         （gradient）
+  旋转             （transform）
+  缩放,定位,倾斜,动画,多背景
+  eg：transform:\scale(0.85,0.90)\ translate(0px,-30px)\ skew(-9deg,0deg)\Animation:
+5.px和em的区别
+   px和em都是长度单位，区别是，px的值是固定的，指定是多少就是多少，计算比较容易。em得值不是固定的，并且em会继承父级元素的字体大小。
+6.清除浮动的方法？
+     **父级div定义 height 
+    原理：父级div手动定义height，就解决了父级div无法自动获取到高度的问题。 
+    优点：简单、代码少、容易掌握 
+    缺点：只适合高度固定的布局，要给出精确的高度，如果高度和父级div不一样时，会产生问题
+    **结尾处加空div标签 clear:both
+    原理：添加一个空div，利用css提高的clear:both清除浮动，让父级div能自动获取到高度 
+    优点：简单、代码少、浏览器支持好、不容易出现怪问题 
+    缺点：不少初学者不理解原理；如果页面浮动布局多，就要增加很多空div，让人感觉很不好
+    **父级div定义 伪类:after 和 zoom
+    原理：IE8以上和非IE浏览器才支持:after，原理和方法2有点类似，zoom(IE转有属性)可解决ie6,ie7浮动问题 
+    优点：浏览器支持好、不容易出现怪问题（目前：大型网站都有使用，如：腾迅，网易，新浪等等） 
+    缺点：代码多、不少初学者不理解原理，要两句代码结合使用才能让主流浏览器都支持
+     **父级div定义 overflow:hidden
+    原理：必须定义width或zoom:1，同时不能定义height，使用overflow:hidden时，浏览器会自动检查浮动区域的高度 
+    优点：简单、代码少、浏览器支持好 
+    缺点：不能和position配合使用，因为超出的尺寸的会被隐藏。
+7.怎样解决margin的同向重叠？
+    （1）在最外层的div中加入overflow:hidden;zoom:1
+    （2）在最外层加入padding:1px;属性
+   （3）在最外层加入：border:1px solid #cacbcc;
+8.浏览器的内核分别是什么?
+     IE: trident内核
+    Firefox：gecko内核
+    Safari：webkit内核
+    Opera：以前是presto内核，Opera现已改用Google Chrome的Blink内核
+    Chrome：Blink(基于webkit，Google与Opera Software共同开发)
+9.你有哪些性能优化的方法？ 
+       减少 HTTP 请求 、减少 DNS 查找  、 避免重定向 、 使用 Ajax 缓存 、延迟载入组件 、预先载入组件 、 减少 DOM 元素数量 、切分组件到多个域 、最小化 iframe 的数量 、不要出现http 404 错误
+
+10.js的基本数据类型以及null和undefined的区别。
+      基本数据类型：number、string、boolean、function、undefined、object
+      区别：null： Null类型，代表“空值”，代表一个空对象指针，使用typeof运算得到 “object”，所以你可以认为它是一个特殊的对象值。
+            undefined： Undefined类型，当一个声明了一个变量未初始化时，得到的就是undefined。
+	    undefined是访问一个未初始化的变量时返回的值，而null是访问一个尚未存在的对象时所返回的值。因此，可以把undefined看作是空的变量，而null看作是空的对象。
+            在定义一个想保存对象的变量时，就可以让该变量先保存null值。
+11.什么是事件委托？
+      事件委托，通俗地来讲，就是把一个元素响应事件（click、keydown……）的函数委托到另一个元素；一般来讲，会把一个或者一组元素的事件委托到它的父层或者更外层元素上，
+    真正绑定事件的是外层元素，当事件响应到需要绑定的元素上时，会通过事件冒泡机制从而触发它的外层元素的绑定事件上，然后在外层元素上去执行函数。事件委托的好处包括：动态
+    绑定事件与减少内存消耗。
+12.JavaScript 与 HTML 之间交互的事件模型分为几个阶段？
+      捕获阶段：在事件冒泡的模型中，捕获阶段不会响应任何事件；
+      目标阶段：目标阶段就是指事件响应到触发事件的最底层元素上；
+      冒泡阶段：冒泡阶段就是事件的触发响应会从最底层目标一层层地向外到最外层（根节点），
+                事件代理即是利用事件冒泡的机制把里层所需要响应的事件绑定到外层；
+13.表单提交中Get和Post方式的区别？
+     (1)get 是从服务器上获取数据， post 是向服务器传送数据。 
+     (2)get 是把参数数据队列加到提交表单的 ACTION 属性所指的 URL 中，值和表单内各个字段一一对应，在 URL 中可以看到。 
+        post 是通过 HTTP post 机制，将表单内各个字段与其内容放置在 HTML HEADER 内一起传送到 ACTION 属性所指的 URL 地址 , 用户看不到这个过程。 
+     (3)对于 get 方式，服务器端用 Request.QueryString 获取变量的值，对于 post 方式，服务器端用 Request.Form 获取提交的数据。 
+     (4)get 传送的数据量较小，不能大于 2KB 。 post 传送的数据量较大，一般被默认为不受限制。但理论上， IIS4 中最大量为 80KB ， IIS5 中为 100KB 。 
+     (5)get 安全性非常低， post 安全性较高。
+14.怎样添加、移除、移动、复制、创建和查找节点？
+      创建新节点
+     createDocumentFragment() //创建一个DOM片段
+     createElement() //创建一个具体的元素
+     createTextNode() //创建一个文本节点
+       添加、移除、替换、插入
+      appendChild() //添加
+      removeChild() //移除
+      replaceChild() //替换
+      insertBefore() //插入
+       查找
+     getElementsByTagName() //通过标签名称
+     getElementsByName() //通过元素的Name属性的值
+     getElementById() //通过元素Id，唯一性
+15.Javascript中的定时器有哪些？他们的区别及用法是什么？
+        setTimeout     只执行一次
+        setInterval    会一直重复执行
+16.常见的HTTP状态码解释
+     2开头 （请求成功）表示成功处理了请求的状态代码。
+     3开头 （请求被重定向）表示要完成请求，需要进一步操作。 通常，这些状态代码用来重定向。
+     4开头 （请求错误）这些状态代码表示请求可能出错，妨碍了服务器的处理。
+     5开头（服务器错误）这些状态代码表示服务器在尝试处理请求时发生内部错误。 这些错误可能是服务器本身的错误，而不是请求出错。
+17.请写出你对闭包的理解，并列出简单的理解.
+       使用闭包主要是为了设计私有的方法和变量。闭包的优点是可以避免全局变量的污染，缺点是闭包会常驻内存，会增大内存使用量，使用不当很容易造成内存泄露。
+       闭包有三个特性：
+          函数嵌套函数 
+          函数内部可以引用外部的参数和变量 
+          参数和变量不会被垃圾回收机制回收
+18.请解释下JavaScript的同源策略？ 
+         同源策略简单的说就是一段脚本只能读取来自于同一来源的窗口和文档的属性，这里的同一来源指的是主机名、协议和端口号的组合。
+19.let，const，var 区别？ 
+       var：函数作用域，存在变量提升 
+       let：块作用域，不存在变量提升 
+      const：不能修改的是栈内存在的值和地址。声明一个基本类型的时候为常量，不可修改；声明对象可以修改
+20.什么是vue生命周期 ? 
+    vue实例从被创建到销毁的一系列过程就叫vue生命周期. 也就是从开始创建、初始化数据、编译模版、挂载DOM→渲染、更新、渲染、卸载等一系列过程。
+21.语义化的理解。
+ 用正确的标签做正确的事情！
+   html语义化就是让页面的内容结构化，便于对浏览器、搜索引擎解析；
+   在没有样式CCS情况下也以一种文档格式显示，并且是容易阅读的。
+   搜索引擎的爬虫依赖于标记来确定上下文和各个关键字的权重，利于 SEO。
+   使阅读源代码的人对网站更容易将网站分块，便于阅读维护理解。
+22.请描述一下 cookies，sessionStorage 和 localStorage 的区别？
+ cookie在浏览器和服务器间来回传递。 sessionStorage和localStorage不会
+   sessionStorage和localStorage的存储空间更大；
+   sessionStorage和localStorage有更多丰富易用的接口；
+   sessionStorage和localStorage各自独立的存储空间；
+23.eval是做什么的？
+它的功能是把对应的字符串解析成JS代码并运行；
+   应该避免使用eval，不安全，非常耗性能（2次，一次解析成js语句，一次执行）。
+24.ajax是什么
+ajax是一种在无需重新加载整个网页的情况下，能够更新部分网页的技术。（异步无刷新）
+25.ajax的缺点是什么？
+1、ajax不支持浏览器back按钮。
+2、安全问题 AJAX暴露了与服务器交互的细节。
+3、对搜索引擎的支持比较弱。
+4、破坏了程序的异常机制。
+5、不容易调试。。
+26. GET 和 POST 的区别?
+1、get是从服务器上获取的数据。
+     post则是向服务器传送数据。
+2、get是把参数数据队列加到提交表单的ACTION属性所指的URL中，值和表单内各个字段一一对应，在URL中可以看到。
+     post是通过HTTP post机制，将表单内各个字段与其内容放置在HTML HEADER内一起传送到ACTION属性所指的URL地址。用户看不到这个过程。
+3、get方式，服务器端用Request.QueryString获取变量的值。
+     post方式，服务器端用Request.Form获取提交的数据。
+4、get传送的数据量较小，不能大于2KB。
+     post传送的数据量较大，一般被默认为不受限制。但理论上，IIS4中最大量为80KB，IIS5中为100KB。
+5、get安全性比较低。
+     post安全性较高。
+6、在FORM提交的时候，如果不指定Method，则默认为GET请求，Form中提交的数据将会附加在url之后，以?分开与url分开。字母数字字符原 样发送，但空格转换为“+“号，其它符号转换为%XX,其中XX为该符号以16进制表示的ASCII（或ISO Latin-1）值。GET请求请提交的数据放置在HTTP请求协议头中。
+     而POST提交的数据则放在实体数据中；GET方式提交的数据最多只能有1024字节，而POST则没有此限制。
+27、解释下浮动和它的工作原理。
+浮动元素不会占据文档流
+当浮动元素碰到包含它的元素的边框或者其他浮动元素的边框时会停留下来。
+28、.”==”和“===”的不同
+“===”先判断类型，再比较值；会自动转换类型
+“==”直接比较值；不会自动转换类型
+29.你如何对网站的文件和资源进行优化
+文件合并   文件最小化/文件压缩   使用CDN托管
+30、如何阻止事件买炮和默认事件
+canceBubble return false
+31、解释jsonp的原理，以及为什么不是真正的ajax
+动态创建script标签，回调函数
+ajax是页面无刷新请求数据操作
+32、split() join() 的区别
+前者是切割成数组的形式，后者是将数组转换成字符串
+33、描述一下渐进增强和优雅降级之间的不同
+优雅降级：Web站点在所有新式浏览器中都能正常工作，如果用户使用的是老式浏览器，则代码会检查以确认它们是否能正常工作。由于IE独特的盒模型布局问题，针对不同版本的IE的hack实践过优雅降级了,为那些无法支持功能的浏览器增加候选方案，使之在旧式浏览器上以某种形式降级体验却不至于完全失效.
+  渐进增强：从被所有浏览器支持的基本功能开始，逐步地添加那些只有新式浏览器才支持的功能,向页面增加无害于基础浏览器的额外样式和功能的。当浏览器支持时，它们会自动地呈现出来并发挥作用。
+34、请说出三种减低页面加载时间的方法
+ 1、压缩css、js文件
+2、合并js、css文件，减少http请求
+3、外部js、css文件放在最底下
+4、减少dom操作，尽可能用变量替代不必要的dom操作
+35、undefined出现的几种情况 
+访问一个不存在的属性。
+定义的变量未赋值。
+函数没有返回值，或return后没有数据。
+36、 apply和 call的区别
+apply：调用一个对象的一个方法，用另一个对象替换当前对象。例如：B.apply(A, arguments);即A对象应用B对象的方法。
+call：调用一个对象的一个方法，用另一个对象替换当前对象。例如：B.call(A, args1,args2);即A对象调用B对象的方法。
+37、ES6箭头函数和ES5普通函数的区别
+es6箭头函数内部没有this,使用时会上朔寻找最近的this
+不可以做构造函数,不能使用new命令,因为没有this
+函数体内没有arguments,可以使用rest参数代替
+不能用yield,不能使用generator函数
+38、如何区分 HTML 和 HTML5？
+1）在文档类型声明上不同：
+HTML是很长的一段代码，很难记住，而HTML5却只有简简单单的声明，方便记忆。
+2）在结构语义上不同：
+HTML：没有体现结构语义化的标签，通常都是这样来命名的<div id="header"></div>，这样表示网站的头部。
+HTML5：在语义上却有很大的优势。提供了一些新的标签，比如：<header><article><footer>
+39、display:inline-block 什么时候会显示间隙？
+移除空格，使用margin 负值、使用 font-size:0、letter-spacing 、word-spacing
+40、JSON 的了解？
+JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。
+它是基于JavaScript的一个子集。数据格式简单, 易于读写, 占用带宽小
+{'age':'12', 'name':'back'}
+
+
